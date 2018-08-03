@@ -1,126 +1,229 @@
 <template>
-  <div>
+  <div class="iview-area">
+    <!-- 省份的选择 -->
     <Select
-      placeholder="全部省"
+      placeholder="请选择省"
       clearable
-      v-model="currentProvince"
+      v-model="current.provinceIndex"
       @on-change="provinceChange"
+      label-in-value
       not-found-text=""
-      style="width:200px">
+      style="width:120px">
       <Option
-        v-for="item in provinceList"
-        :value="item.value"
-        :key="item.value">
-        {{ item.label }}
+        v-for="(item, index) in provinceList"
+        :value="index"
+        :label="item.name"
+        :key="index">
+        {{ item.name }}
       </Option>
     </Select>
+    <!-- 市的选择 -->
     <Select
-      placeholder="全部市"
+      placeholder="请选择市"
       clearable
-      v-model="currentCity"
+      v-model="current.cityIndex"
       @on-change="cityChange"
+      label-in-value
       not-found-text=""
-      style="width:200px">
+      style="width:120px">
       <Option
-        v-for="item in cityList"
-        :value="item.value"
-        :key="item.value">
-        {{ item.label }}
+        v-for="(item, index) in cityList"
+        :value="index"
+        :label="item.name"
+        :key="index">
+        {{ item.name }}
       </Option>
     </Select>
+    <!-- 区的选择 -->
     <Select
       not-found-text=""
-      placeholder="全部区"
+      placeholder="请选择区"
+      @on-change="areaChange"
       clearable
-      v-model="currentArea"
-      style="width:200px">
+      v-model="current.areaIndex"
+      style="width:120px">
       <Option
-        v-for="item in areaList"
-        :value="item.value"
-        :key="item.value">
-        {{ item.label }}
+        v-for="(item, index) in areaList"
+        :value="index"
+        :label="item.name"
+        :key="index">
+        {{ item.name }}
       </Option>
     </Select>
   </div>
 </template>
 
 <script>
-import pcaa from 'area-data/pcaa'
+// import pcaa from 'area-data/pcaa'
+// import province from '@/data/province'
+import area from '@/data/area'
+const allField = { code: '00', name: '全部' }
+
 export default {
   data () {
     return {
-      currentProvince: '',
-      currentCity: '',
-      currentArea: '',
+      current: {
+        provinceIndex: '',
+        cityIndex: '',
+        areaIndex: ''
+      },
+      /** 省市区的select组件的值 */
       provinceList: [],
       cityList: [],
       areaList: []
     }
   },
-  methods: {
-    /** 初始化省的数据 */
-    initProvince () {
-      this.provinceList.push({
-        value: '000000',
-        label: '全部'
-      })
+  computed: {
+    // 计算当前的省市区数组
+    valueList: {
+      get () {
+        let result = []
 
-      for (let p in pcaa[86]) {
-        this.provinceList.push({
-          value: p,
-          label: pcaa[86][p]
-        })
+        this.current.provinceIndex && result.push(this.currentProvince) &&
+        this.current.cityIndex && result.push(this.currentCity) &&
+        this.current.areaIndex && result.push(this.currentArea)
+
+        switch (this.typeName) {
+          case 'all': return result
+          case 'name': return result.map(item => { return item.name })
+          case 'code': return result.map(item => { return item.code })
+        }
       }
     },
+    currentProvince: {
+      get () {
+        let { code, name } = this.provinceList[this.current.provinceIndex] || allField
+        return { code, name }
+      }
+    },
+    currentCity: {
+      get () {
+        let { code, name } = this.cityList[this.current.cityIndex] || allField
+        return { code, name }
+      }
+    },
+    currentArea: {
+      get () {
+        let { code, name } = this.areaList[this.current.areaIndex] || allField
+        return { code, name }
+      }
+    }
+  },
+  props: {
+    value: {
+      type: Array,
+      default: () => []
+    },
+    typeName: {
+      type: String,
+      default: 'all',
+      validator (value) {
+        return ['all', 'name', 'code'].indexOf(value) !== -1
+      }
+    }
+  },
+  model: {
+    props: 'value',
+    event: 'change'
+  },
+  methods: {
+    /** 将传入的值进行显示 */
+    init () {
+      if (this.value.length === 0) return
 
-    /** 根据code初始化市或区的数据 */
-    initCityArea (type, code) {
-      // 如果code为undefined或者000000（全部）则市或者区列表为空
-      if (!code || code === '000000') {
+      let temp
+
+      let getIndex = function (val) {
+        temp = this.value.shift()
+
+        if (!temp) return false
+
+        return this[`${val}List`].some((item, index) => {
+          if (item.code === temp.code || item.name === temp.name) {
+            this.current[`${val}Index`] = index
+            this[`${val}Change`]({label: temp.name, value: index})
+            return true
+          }
+        })
+
+      }.bind(this)
+
+      getIndex('province') &&
+      getIndex('city') &&
+      getIndex('area')
+    },
+    /** 创建省，市，区的下拉列表数据
+     * @method createList
+     * @param {String} type 类型只有'province', 'city', 'area' 表示初始化不同的数据
+     * @param {Array} list 初始化的列表
+     */
+    createList (type, list) {
+      // 如果传入的list为undefined，则列表置为空
+      if (!list) {
         this[`${type}List`] = []
         return
       }
 
-      this[`${type}List`] = [{
-        value: '000000',
-        label: '全部'
-      }]
-
-      for (let p in pcaa[code]) {
-        this[`${type}List`].push({
-          value: p,
-          label: pcaa[code][p]
-        })
-      }
+      this[`${type}List`] = [allField, ...list]
     },
 
-    /** 改变省份 */
+    /** 改变省份 获取省份的索引和值 {label: "北京市", value: 1} */
     provinceChange (val) {
+      console.log(val)
+      // 获取选中省份的城市
+      let citys = val && this.provinceList[val.value]['citys']
+
       // 渲染city列表
-      this.initCityArea('city', val)
+      this.createList('city', citys)
 
       // 将原有的city和area重置为''
-      this.currentCity = ''
-      this.currentArea = ''
+      this.current.cityIndex = ''
+      this.current.areaIndex = ''
+
+      this.$emit('change', this.valueList)
+      this.$emit('onChange', this.valueList)
     },
 
     /** 改变市 */
     cityChange (val) {
+      // 获取选中城市的区
+      let areas = val && this.cityList[val.value]['areas']
+
       // 渲染area列表
-      this.initCityArea('area', val)
+      this.createList('area', areas)
 
       // 将原有的area重置为''
-      this.currentArea = ''
+      this.current.areaIndex = ''
+
+      this.$emit('change', this.valueList)
+      this.$emit('onChange', this.valueList)
+    },
+
+    /** 改变区 */
+    areaChange () {
+      this.$emit('change', this.valueList)
+      this.$emit('onChange', this.valueList)
+    },
+
+    /** 清空所有，重置 */
+    clear () {
+      this.current.provinceIndex = ''
+      this.current.cityIndex = ''
+      this.current.areaIndex = ''
+
+      this.$emit('change', this.valueList)
     }
 
   },
   created () {
-    console.log(pcaa)
-    this.initProvince()
+    this.createList('province', area)
+    this.init()
   }
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
+  .iview-area {
+    display: inline-block;
+  }
 </style>
