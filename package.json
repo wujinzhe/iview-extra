@@ -1,6 +1,6 @@
 {
   "name": "iview-extra",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "description": "A Vue.js project",
   "author": "吴晋哲 <wujinzhe@iboxpay.com>",
   "main": "dist/iviewExtra.js",
@@ -20,7 +20,7 @@
   "dependencies": {
     "area-data": "^5.0.6",
     "iview": "^2.14.3",
-    "iview-extra": "^0.1.0",
+    "iview-extra": "^0.1.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },

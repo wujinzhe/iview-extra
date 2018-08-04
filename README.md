@@ -1,27 +1,17 @@
-# iview-extra
+# iview-extra  基于iview的UI组件
 
-> A Vue.js project
 
-## Build Setup
+## 使用
 
 ``` bash
-# install dependencies
-npm install
+# 安装依赖
+npm install iview-extra -S
 
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run all tests
-npm test
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+``` JS
+import iViewExtra from 'iview-extra'
+
+Vue.use(iViewExtra)
+```
+和iview一样引入，引入完之后可以直接使用对应的组件，样式只需要引入iview的样式即可，不需要引入其它样式

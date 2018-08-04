@@ -15,8 +15,7 @@ module.exports = merge(webpackBaseConfig, {
   },
   output: {
     path: resolve('../examples/dist'),
-    filename: '[name].[hash].js',
-    publicPath: '/'
+    filename: '[name].[hash].js'
   },
   devtool: '#source-map',
   devServer: {

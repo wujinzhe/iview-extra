@@ -5,17 +5,9 @@ import App from './App'
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
 
-// const bbb = require('../dist1/index.js')
-// import bbb from '../dist1/bbb.js'
 import iViewExtra from 'iview-extra'
-// import iViewExtra from '../dist/iviewExtra.js'
-// // const iViewExtra = require('../dist/iview-extra.js')
-// // bbb
-// console.log(bbb)
-// console.log('------')
-// console.log(iViewExtra)
-Vue.use(iViewExtra)
 Vue.use(iView)
+Vue.use(iViewExtra)
 
 Vue.config.productionTip = false
 

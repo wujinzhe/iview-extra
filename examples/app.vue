@@ -7,6 +7,8 @@
     <h3>地址组件 （给定初始化的值）</h3>
     <i-area ref="area" v-model="value1" type-name="name"></i-area>
     <Button type="primary" @click="$refs.area.clear()">清空</Button>
+    <Icon type="md-alarm" />
+    <Button type="primary" shape="circle" icon="ios-search"></Button>
   </div>
 </template>
 
