@@ -18,3 +18,4 @@ const iviewExtra = {
 }
 
 export default iviewExtra
+// module.exports.default = module.exports = iviewExtra
