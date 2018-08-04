@@ -1,5 +1,3 @@
-const webpack = require('webpack')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const merge = require('webpack-merge')
 const webpackBaseConfig = require('./webpack.base.config.js')
@@ -14,11 +12,10 @@ module.exports = merge(webpackBaseConfig, {
   },
   output: {
     path: resolve('../dist1'),
-    filename: 'webpack-bbb.js',
-    publicPath: '/dist1/',
-    library: 'webpackBbb',
+    filename: 'bbb.js',
+    library: 'bbb',
     libraryTarget: 'umd',
-    libraryExport: "default"
+    umdNamedDefine: true
   },
   plugins: [
     new CleanWebpackPlugin(['dist1/*'], {

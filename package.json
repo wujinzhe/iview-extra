@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "description": "A Vue.js project",
   "author": "吴晋哲 <wujinzhe@iboxpay.com>",
-  "private": true,
   "main": "dist/iview-extra.js",
   "files": [
     "dist",

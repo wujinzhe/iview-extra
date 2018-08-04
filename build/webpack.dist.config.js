@@ -14,10 +14,9 @@ module.exports = merge(webpackBaseConfig, {
   },
   output: {
     path: resolve('../dist'),
-    filename: 'iview-extra.js',
-    publicPath: './',
+    filename: 'iviewExtra.js',
     libraryTarget: 'umd',
-    library: 'webpackExtra',
+    library: 'iviewExtra',
     umdNamedDefine: true
   },
   externals: {
@@ -32,11 +31,11 @@ module.exports = merge(webpackBaseConfig, {
     new CleanWebpackPlugin(['dist/*'], {
       root: path.resolve(__dirname, '../')
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    }),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: {
+    //     warnings: false
+    //   }
+    // }),
     new webpack.DefinePlugin({
       'process.env': {
           NODE_ENV: '"production"'

@@ -2,19 +2,20 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import iView from 'iview'
-// import iViewExtra from '../src/'
-import iViewExtra from '../dist/iview-extra.js'
+import iView from '../dist/iview.js'
 import 'iview/dist/styles/iview.css'
 
 // const bbb = require('../dist1/index.js')
-import bbb from '../dist1/index.js'
-// bbb
-console.log(bbb)
-console.log('------')
-console.log(iViewExtra)
+// import bbb from '../dist1/bbb.js'
+// // import iViewExtra from '../src/'
+// import iViewExtra from '../dist/iviewExtra.js'
+// // const iViewExtra = require('../dist/iview-extra.js')
+// // bbb
+// console.log(bbb)
+// console.log('------')
+// console.log(iViewExtra)
+// Vue.use(iViewExtra)
 Vue.use(iView)
-Vue.use(iViewExtra)
 
 Vue.config.productionTip = false
 
