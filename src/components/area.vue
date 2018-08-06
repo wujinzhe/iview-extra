@@ -19,6 +19,7 @@
     </Select>
     <!-- 市的选择 -->
     <Select
+      ref="citys"
       placeholder="请选择市"
       clearable
       v-model="current.cityIndex"
@@ -36,6 +37,7 @@
     </Select>
     <!-- 区的选择 -->
     <Select
+      ref="areas"
       not-found-text=""
       placeholder="请选择区"
       @on-change="areaChange"
@@ -120,6 +122,10 @@ export default {
       validator (value) {
         return ['all', 'name', 'code'].indexOf(value) !== -1
       }
+    },
+    autoToggleMenu: {
+      type: Boolean,
+      default: false
     }
   },
   model: {
@@ -182,6 +188,9 @@ export default {
 
       this.$emit('change', this.valueList)
       this.$emit('onChange', this.valueList)
+      if (this.autoToggleMenu && val && this.$refs.citys) {
+        this.$refs.citys.toggleMenu()
+      }
     },
 
     /** 改变市 */
@@ -197,6 +206,9 @@ export default {
 
       this.$emit('change', this.valueList)
       this.$emit('onChange', this.valueList)
+      if (this.autoToggleMenu && val && this.$refs.areas) {
+        this.$refs.areas.toggleMenu()
+      }
     },
 
     /** 改变区 */
