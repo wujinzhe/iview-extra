@@ -9,6 +9,8 @@
     <Button type="primary" @click="$refs.area.clear()">清空</Button>
     <Icon type="md-alarm" />
     <Button type="primary" shape="circle" icon="ios-search"></Button>
+    <h3>地址组件 （选择上一级后，下一级选择自动弹出）</h3>
+    <i-area v-model="value" :autoToggleMenu="true"></i-area>
   </div>
 </template>
 
