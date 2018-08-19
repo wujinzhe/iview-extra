@@ -1,20 +1,19 @@
-import Number from './components/number.vue'
-import Area from './components/area.vue'
+import iviewNumber from './components/iview-number.vue'
+import iviewArea from './components/iview-area.vue'
 
-const component = {
-  Number,
-  iArea: Area
+const iviewExtraComponent = {
+  iviewNumber,
+  iviewArea
 }
-
 const install = function install (Vue, option) {
-  for (let key in component) {
-    Vue.component(key, component[key])
+  for (let key in iviewExtraComponent) {
+    Vue.component(key, iviewExtraComponent[key].default)
   }
 }
 
 const iviewExtra = {
   install,
-  ...component
+  ...iviewExtraComponent
 }
 
 export default iviewExtra

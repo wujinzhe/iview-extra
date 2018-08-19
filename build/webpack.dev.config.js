@@ -19,7 +19,6 @@ module.exports = merge(webpackBaseConfig, {
   },
   devtool: '#source-map',
   devServer: {
-    port: 8080,
     host: '0.0.0.0',
     hot: true,
     proxy: {}

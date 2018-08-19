@@ -1,11 +1,11 @@
 <template>
   <div style="margin:100px;">
     <h3>数字输入组件</h3>
-    <number v-model="test" style="width: 200px;"></number>
+    <iview-number v-model="test" style="width: 200px;"></iview-number>
     <h3>地址组件 （双向绑定值）</h3>
-    <i-area v-model="value"></i-area>
+    <iview-area v-model="value"></iview-area>
     <h3>地址组件 （给定初始化的值）</h3>
-    <i-area ref="area" v-model="value1" type-name="name"></i-area>
+    <iview-area ref="area" v-model="value1" type-name="name"></iview-area>
     <Button type="primary" @click="$refs.area.clear()">清空</Button>
     <Icon type="md-alarm" />
     <Button type="primary" shape="circle" icon="ios-search"></Button>
