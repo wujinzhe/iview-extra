@@ -5,7 +5,9 @@ import App from './App'
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
 
-import iViewExtra from '../src/index.js'
+// import iViewExtra from '../src/index.js'
+import iViewExtra from '../dist/iViewExtra.js'
+console.log(iViewExtra)
 Vue.use(iView)
 Vue.use(iViewExtra)
 

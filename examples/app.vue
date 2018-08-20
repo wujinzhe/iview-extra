@@ -9,6 +9,7 @@
     <Button type="primary" @click="$refs.area.clear()">清空</Button>
     <Icon type="md-alarm" />
     <Button type="primary" shape="circle" icon="ios-search"></Button>
+    <div style="margin-top: 20px;">{{JSON.stringify(value1)}}</div>
   </div>
 </template>
 
