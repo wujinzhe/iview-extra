@@ -33,14 +33,12 @@
     "build:dev": "webpack --config build/webpack.dist.dev.config.js"
   },
   "dependencies": {
-    "area-data": "^5.0.6",
-    "iview": "^2.14.3",
-    "iview-extra": "^0.1.1",
-    "sortablejs": "^1.7.0",
-    "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "iview": "^2.7.0",
+    "sortablejs": "^1.7.0"
   },
   "devDependencies": {
+    "vue": "^2.5.2",
+    "vue-router": "^3.0.1",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-eslint": "^8.2.1",

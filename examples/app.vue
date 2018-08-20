@@ -3,7 +3,7 @@
     <h3>数字输入组件</h3>
     <iview-number v-model="test" style="width: 200px;"></iview-number>
     <h3>地址组件 （双向绑定值）</h3>
-    <iview-area v-model="value"></iview-area>
+    <iview-area v-model="value" type-name="name"></iview-area>
     <h3>地址组件 （给定初始化的值）</h3>
     <iview-area ref="area" v-model="value1" type-name="name"></iview-area>
     <Button type="primary" @click="$refs.area.clear()">清空</Button>

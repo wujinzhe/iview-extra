@@ -54,8 +54,6 @@
 </template>
 
 <script>
-// import pcaa from 'area-data/pcaa'
-// import province from '@/data/province'
 import area from '@/data/area'
 const allField = { code: '00', name: '全部' }
 
@@ -79,8 +77,8 @@ export default {
       get () {
         let result = []
 
-        this.current.provinceIndex && result.push(this.currentProvince) &&
-        this.current.cityIndex && result.push(this.currentCity) &&
+        this.current.provinceIndex && result.push(this.currentProvince)
+        this.current.cityIndex && result.push(this.currentCity)
         this.current.areaIndex && result.push(this.currentArea)
 
         switch (this.typeName) {
@@ -145,7 +143,6 @@ export default {
             return true
           }
         })
-
       }.bind(this)
 
       getIndex('province') &&
@@ -169,9 +166,13 @@ export default {
 
     /** 改变省份 获取省份的索引和值 {label: "北京市", value: 1} */
     provinceChange (val) {
-      console.log(val)
+      // 在一些老版本的iview中 select清空值 会传递 {label: "", value: ""}
+      // 2.14.0版本以上会 则传递undefined 为了兼容老版本的iview
       // 获取选中省份的城市
-      let citys = val && this.provinceList[val.value]['citys']
+      let citys = (val &&
+                  val.value &&
+                  this.provinceList[val.value]['citys']) ||
+                  undefined
 
       // 渲染city列表
       this.createList('city', citys)
@@ -186,8 +187,13 @@ export default {
 
     /** 改变市 */
     cityChange (val) {
+      // 在一些老版本的iview中 select清空值 会传递 {label: "", value: ""}
+      // 2.14.0版本以上会 则传递undefined 为了兼容老版本的iview
       // 获取选中城市的区
-      let areas = val && this.cityList[val.value]['areas']
+      let areas = (val &&
+                  val.value &&
+                  this.cityList[val.value]['areas']) ||
+                  undefined
 
       // 渲染area列表
       this.createList('area', areas)
