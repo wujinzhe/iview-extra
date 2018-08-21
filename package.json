@@ -1,6 +1,6 @@
 {
   "name": "iview-extra",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "基于iview的UI库",
   "author": "吴晋哲 <wujinzhe@iboxpay.com>",
   "main": "dist/iviewExtra.js",
