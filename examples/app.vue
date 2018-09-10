@@ -20,20 +20,7 @@ export default {
       test: 1,
       text: 2,
       value: [],
-      value1: [
-        {
-          code: '21',
-          name: '辽宁省'
-        },
-        {
-
-          name: '沈阳市'
-        },
-        {
-
-          name: '大东区'
-        }
-      ]
+      value1: []
     }
   },
   methods: {
@@ -47,6 +34,24 @@ export default {
     keydown (val) {
       console.log(val)
     }
+  },
+  created () {
+    setTimeout(() => {
+      this.value1 = [
+        {
+          code: '21',
+          name: '辽宁省'
+        },
+        {
+
+          name: '沈阳市'
+        },
+        {
+
+          name: '大东区'
+        }
+      ]
+    }, 1)
   }
 }
 </script>
