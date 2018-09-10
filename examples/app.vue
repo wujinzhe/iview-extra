@@ -36,7 +36,7 @@ export default {
       console.log(val)
     }
   },
-  mounted () {
+  created () {
     setTimeout(() => {
       this.value1 = [
         {
@@ -52,7 +52,7 @@ export default {
           name: '大东区'
         }
       ]
-    })
+    }, 1)
   }
 }
 </script>
