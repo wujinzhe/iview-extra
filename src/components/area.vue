@@ -60,6 +60,23 @@ import area from '@/data/area'
 const allField = { code: '00', name: '全部' }
 
 export default {
+  props: {
+    value: {
+      type: Array,
+      default: () => []
+    },
+    typeName: {
+      type: String,
+      default: 'all',
+      validator (value) {
+        return ['all', 'name', 'code'].indexOf(value) !== -1
+      }
+    }
+  },
+  model: {
+    props: 'value',
+    event: 'change'
+  },
   data () {
     return {
       current: {
@@ -71,6 +88,17 @@ export default {
       provinceList: [],
       cityList: [],
       areaList: []
+    }
+  },
+  watch: {
+    value: {
+      handler: function(val) {
+        console.log('val', val)
+        if (val.length != 0) {
+          this.init()
+        }
+      },
+      deep: true
     }
   },
   computed: {
@@ -108,23 +136,6 @@ export default {
         return { code, name }
       }
     }
-  },
-  props: {
-    value: {
-      type: Array,
-      default: () => []
-    },
-    typeName: {
-      type: String,
-      default: 'all',
-      validator (value) {
-        return ['all', 'name', 'code'].indexOf(value) !== -1
-      }
-    }
-  },
-  model: {
-    props: 'value',
-    event: 'change'
   },
   methods: {
     /** 将传入的值进行显示 */
@@ -181,7 +192,7 @@ export default {
       this.current.areaIndex = ''
 
       this.$emit('change', this.valueList)
-      this.$emit('onChange', this.valueList)
+      this.$emit('on-change', this.valueList)
     },
 
     /** 改变市 */
@@ -196,13 +207,13 @@ export default {
       this.current.areaIndex = ''
 
       this.$emit('change', this.valueList)
-      this.$emit('onChange', this.valueList)
+      this.$emit('on-change', this.valueList)
     },
 
     /** 改变区 */
     areaChange () {
       this.$emit('change', this.valueList)
-      this.$emit('onChange', this.valueList)
+      this.$emit('on-change', this.valueList)
     },
 
     /** 清空所有，重置 */
@@ -218,6 +229,7 @@ export default {
   created () {
     this.createList('province', area)
     this.init()
+    console.log('props', this.value)
   }
 }
 </script>
