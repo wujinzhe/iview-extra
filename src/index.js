@@ -1,5 +1,5 @@
 import iviewNumber from './components/iview-number.vue'
-import iviewArea from './components/iview-area.vue'
+import iviewArea from './components/iview-area/index.vue'
 
 const iviewExtraComponent = {
   iviewNumber,
